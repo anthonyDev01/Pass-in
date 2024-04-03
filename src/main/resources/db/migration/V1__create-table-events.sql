@@ -5,3 +5,5 @@ CREATE TABLE events(
     slug VARCHAR(255) NOT NULL,
     maximum_attendees INTEGER NOT NULL
 );
+
+
