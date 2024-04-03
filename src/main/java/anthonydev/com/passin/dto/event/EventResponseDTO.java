@@ -2,10 +2,8 @@ package anthonydev.com.passin.dto.event;
 
 import anthonydev.com.passin.domain.event.Event;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class EventResponseDTO {
     EventDetailDTO event;
 
