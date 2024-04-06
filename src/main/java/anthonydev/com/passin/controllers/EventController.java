@@ -1,5 +1,7 @@
 package anthonydev.com.passin.controllers;
 
+import anthonydev.com.passin.dto.attendee.AttendeeIdDTO;
+import anthonydev.com.passin.dto.attendee.AttendeeResquestDTO;
 import anthonydev.com.passin.dto.attendee.AttendeesListResponseDTO;
 import anthonydev.com.passin.dto.event.EventIdDTO;
 import anthonydev.com.passin.dto.event.EventRequestDTO;
@@ -31,6 +33,15 @@ public class EventController {
         var uri = uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
 
         return ResponseEntity.created(uri).body(eventIdDTO);
+    }
+
+    @PostMapping("/{eventId}/attendees")
+    public ResponseEntity<AttendeeIdDTO> registerParticipant(@PathVariable String eventId, @RequestBody AttendeeResquestDTO body, UriComponentsBuilder uriComponentsBuilder) {
+        AttendeeIdDTO attendeeIdDTO = this.eventService.registerAttenderOnEvent(eventId, body);
+
+        var uri = uriComponentsBuilder.path("/attendees/{attendId}/badge").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
+
+        return ResponseEntity.created(uri).body(attendeeIdDTO);
     }
 
     @GetMapping("/attendees/{id}")
